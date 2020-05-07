@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.992188, 0.0733664, 0.00387573, 1, 0.949219, 0.555024, 0.0482025, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.234177, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.424051, 0.7 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 0.0
+gravity = Vector3( 0, 4, 0 )
+angular_velocity = 90.0
+angular_velocity_random = 1.0
+scale = 0.5
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.177215, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.746835, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 0.0
+gravity = Vector3( 0, 4, 0 )
+angular_velocity = 90.0
+angular_velocity_random = 1.0
+scale = 0.3
+scale_curve = SubResource( 9 )
+color = Color( 0.490196, 0.486275, 0.486275, 0.0941176 )
+
+[sub_resource type="SpatialMaterial" id=11]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=12]
+material = SubResource( 11 )
+
+[node name="Fire" type="Spatial"]
+
+[node name="Flame" type="Particles" parent="."]
+amount = 40
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
+
+[node name="Smoke" type="Particles" parent="."]
+amount = 32
+lifetime = 2.0
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 12 )
